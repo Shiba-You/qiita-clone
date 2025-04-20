@@ -11,4 +11,4 @@ elif [ "$NODE_ENV" = "staging" ]; then
 fi
 
 echo "Running: $SCRIPT"
-exec "$SCRIPT"
+$SCRIPT
