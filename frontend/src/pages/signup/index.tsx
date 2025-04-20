@@ -1,4 +1,3 @@
-import React from "react";
 import SignupPresenter from "./presenter";
 
 const Signup = () => {

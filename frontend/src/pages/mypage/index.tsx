@@ -1,4 +1,3 @@
-import React from "react";
 import MypagePresenter from "./presenter";
 
 const Mypage = () => {
