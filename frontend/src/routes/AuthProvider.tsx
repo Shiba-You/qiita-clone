@@ -23,7 +23,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const checkAuth = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/api/auth/check-auth",
+          `${import.meta.env.VITE_API_ENDPOINT}/api/auth/check-auth`,
           {
             method: "GET",
             credentials: "include", // ← これがないとクッキーが共有されない！

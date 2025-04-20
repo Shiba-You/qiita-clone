@@ -5,7 +5,6 @@ import Login from "../pages/login/index";
 import Dashboard from "../pages/dashboard/index";
 import Mypage from "../pages/mypage/index";
 import DefaultLyaouts from "../layouts/DefaultLyaouts";
-import React from "react";
 import { AuthProvider, PrivateRoute } from "./AuthProvider";
 
 const AppRouter = () => {

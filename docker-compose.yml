@@ -2,23 +2,33 @@ version: "3.9"
 
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        NODE_ENV: ${NODE_ENV}
+    container_name: frontend
+    hostname: frontend
     ports:
       - "5173:5173"
     volumes:
       - ./frontend:/app
       - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV}
     depends_on:
       - backend
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      args:
+        NODE_ENV: ${NODE_ENV}
+    container_name: backend
+    hostname: backend
     ports:
       - "3000:3000"
     volumes:
       - ./backend:/app
       - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV}

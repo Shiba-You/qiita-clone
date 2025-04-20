@@ -2,6 +2,14 @@ const jwt = require("jsonwebtoken");
 const { generators } = require("openid-client");
 const getClient = require("../openid");
 
+const test = (req, res) => {
+  const NODE_ENV = process.env.NODE_ENV;
+
+  console.log(NODE_ENV);
+
+  res.json({ NODE_ENV });
+};
+
 const login = async (req, res) => {
   const client = await getClient();
   const nonce = generators.nonce();
@@ -16,6 +24,9 @@ const login = async (req, res) => {
     nonce: nonce,
   });
 
+  console.log("authUrl");
+  console.log(authUrl);
+
   res.json({ authUrl });
 };
 
@@ -26,7 +37,7 @@ const mypage = async (req, res) => {
     const params = client.callbackParams(req);
 
     const tokenSet = await client.callback(
-      "http://localhost:3000/api/auth/mypage",
+      `${process.env.BACKEND_URL}:${process.env.PORT}/api/auth/mypage`,
       params,
       {
         nonce: req.session.nonce,
@@ -52,7 +63,7 @@ const mypage = async (req, res) => {
       secure: false, // 開発環境 (HTTP) では false。本番環境 (HTTPS) では true にする
       maxAge: 1000 * 60 * 60 * 24, // Cookie の有効期限 (例: 1日)
     });
-    res.redirect("http://localhost:5173/mypage");
+    res.redirect(`${process.env.FRONT_URL}/mypage`);
   } catch (err) {
     console.error("Callback error:", err);
     console.log(process.env.JWT_SECRET);
@@ -67,7 +78,7 @@ const logout = async (req, res) => {
       return res.sendStatus(500);
     }
     res.clearCookie("authToken");
-    const logoutUrl = `https://ap-northeast-14p1q5fqrt.auth.ap-northeast-1.amazoncognito.com/logout?client_id=76h33purbs82ttqho4q9d3f7t6&logout_uri=<logout uri>`;
+    const logoutUrl = process.env.LOGOUT_URL;
     res.redirect(logoutUrl);
   });
 };
@@ -76,4 +87,4 @@ const checkAuth = async (req, res) => {
   res.sendStatus(200);
 };
 
-module.exports = { login, mypage, logout, checkAuth };
+module.exports = { test, login, mypage, logout, checkAuth };
