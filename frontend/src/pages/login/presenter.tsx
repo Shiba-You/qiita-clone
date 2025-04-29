@@ -13,7 +13,7 @@ const LoginPresenter = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        // window.location.href = data.authUrl;
+        window.location.href = data.authUrl;
       } else {
         console.error("Login req failed: ", response.status);
       }
