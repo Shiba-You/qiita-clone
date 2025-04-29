@@ -37,7 +37,7 @@ const mypage = async (req, res) => {
     const params = client.callbackParams(req);
 
     const tokenSet = await client.callback(
-      `${process.env.BACKEND_URL}:${process.env.PORT}/api/auth/mypage`,
+      `${process.env.BACKEND_URL}/api/auth/mypage`,
       params,
       {
         nonce: req.session.nonce,
