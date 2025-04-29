@@ -12,7 +12,8 @@ const LoginPresenter = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        window.location.href = data.authUrl;
+        console.log(data);
+        // window.location.href = data.authUrl;
       } else {
         console.error("Login req failed: ", response.status);
       }
