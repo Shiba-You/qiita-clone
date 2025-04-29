@@ -1,0 +1,1 @@
+1. cognitoでhttps通信のURLに変更（httpはコールバックURLに設定できないため）
