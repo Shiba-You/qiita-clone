@@ -4,10 +4,10 @@
 SCRIPT="dev"
 
 # NODE_ENV によってスクリプト名を切り替える
-if [ "$NODE_ENV" = "production" ]; then
-  SCRIPT="npm run build:production"
-elif [ "$NODE_ENV" = "staging" ]; then
-  SCRIPT="npm run dev:staging -- --host"
+if [ "$NODE_ENV" = "prod" ]; then
+  SCRIPT="npm run build:prod"
+elif [ "$NODE_ENV" = "dev" ]; then
+  SCRIPT="npm run dev:dev -- --host"
 fi
 
 echo "Running: $SCRIPT"
