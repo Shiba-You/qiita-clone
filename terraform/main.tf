@@ -75,7 +75,7 @@ resource "aws_eip" "nginx" {
 
 # EC2インスタンス（Amazon Linux 2）
 resource "aws_instance" "nginx" {
-  ami                    = "ami-0c3fd0f5d33134a76"  # Amazon Linux 2（東京の場合）
+  ami                    = "ami-05206bf8aecfc7ae6"  # Amazon Linux 2（東京の場合）
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids        = [aws_security_group.web.id]
@@ -84,7 +84,7 @@ resource "aws_instance" "nginx" {
   user_data              = file("install_nginx.sh")
 
   tags = {
-    Name = "nginx-server"
+    Name = "shiba-qiita-clone-by-tf"
   }
 }
 
@@ -92,13 +92,4 @@ resource "aws_instance" "nginx" {
 resource "aws_eip_association" "nginx_ip" {
   instance_id   = aws_instance.nginx.id
   allocation_id = aws_eip.nginx.id
-}
-
-# Route53（Aレコード）
-resource "aws_route53_record" "nginx" {
-  zone_id = var.route53_zone_id
-  name    = "nginx.example.com"
-  type    = "A"
-  ttl     = "300"
-  records = [aws_eip.nginx.public_ip]
 }
