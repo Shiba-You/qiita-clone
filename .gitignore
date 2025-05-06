@@ -1,5 +1,6 @@
 *.env*
-terraform/.terraform/*
-terraform/terraform.tfstate
-terraform/terraform.tfstate.*
-terraform/.terraform.lock.*
+*/terraform/.terraform/*
+*/terraform/terraform.tfstate
+*/terraform/terraform.tfstate.*
+*/terraform/.terraform.lock.*
+*/*.pem

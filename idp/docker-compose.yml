@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  keycloak:
+    build:
+      context: ./keycloak
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./certs:/etc/x509
+    environment:
+      KC_HOSTNAME: $DOMAIN
+      KC_HTTPS_CERTIFICATE_FILE: /etc/x509/cert.pem
+      KC_HTTPS_CERTIFICATE_KEY_FILE: /etc/x509/key.pem
+    entrypoint: ["/opt/keycloak/bin/kc.sh", "start"]
