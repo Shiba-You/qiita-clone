@@ -9,9 +9,14 @@
     "build:dev": "tsc -b && vite build --mode dev",
     "build:prod": "tsc -b && vite build --mode prod",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "asbuild:debug": "asc wasm/assembly/index.ts -b debug -O3 --exportRuntime --runtime half",
+    "asbuild:release": "asc wasm/assembly/index.ts --target release -O3 --exportRuntime",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "start": "npx serve ."
   },
   "dependencies": {
+    "@assemblyscript/loader": "^0.27.36",
     "@radix-ui/react-slot": "^1.2.0",
     "@tailwindcss/vite": "^4.1.3",
     "class-variance-authority": "^0.7.1",
@@ -22,7 +27,9 @@
     "react-router-dom": "^7.5.0",
     "tailwind-merge": "^3.2.0",
     "tailwindcss": "^4.1.3",
-    "tw-animate-css": "^1.2.5"
+    "tw-animate-css": "^1.2.5",
+    "vite-plugin-top-level-await": "^1.5.0",
+    "vite-plugin-wasm": "^3.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -30,6 +37,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react-swc": "^3.8.0",
+    "assemblyscript": "^0.27.36",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
